@@ -57,7 +57,7 @@
         };
 
         config = {
-          home.packages = [ pkgs.gh ];
+          home.packages = [ pkgs.git pkgs.gh ];
 
           # Runs on every `home-manager switch`, as the user, on both
           # macOS and Linux (including WSL) — no systemd/launchd needed.

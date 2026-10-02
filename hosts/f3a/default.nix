@@ -22,7 +22,7 @@
     extraGroups = [ "wheel" "networkmanager" ];
   };
 
-  environment.systemPackages = [ pkgs.gh ];
+  environment.systemPackages = [ pkgs.git pkgs.gh ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
