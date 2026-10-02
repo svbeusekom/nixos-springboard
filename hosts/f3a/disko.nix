@@ -4,7 +4,7 @@
     # 2TB: OS
     os = {
       type = "disk";
-      device = "/dev/nvme1n1";
+      device = "/dev/disk/by-id/nvme-Samsung_SSD_970_EVO_2TB_S464NB0M401375Z";
       content = {
         type = "gpt";
         partitions = {
@@ -33,7 +33,7 @@
     # 4TB: persistent data only
     data = {
       type = "disk";
-      device = "/dev/nvme0n1";
+      device = "/dev/disk/by-id/nvme-Samsung_SSD_990_PRO_4TB_S7DPNF0Y615909E";
       content = {
         type = "gpt";
         partitions.persist = {
