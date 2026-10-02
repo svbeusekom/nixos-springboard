@@ -7,14 +7,36 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
+    nixos-wsl.url = "github:nix-community/NixOS-WSL";
+    nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
+    nix-darwin.url = "github:nix-darwin/nix-darwin";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { nixpkgs, home-manager, disko, ... }: {
+  outputs = { self, nixpkgs, home-manager, disko, nixos-wsl, nix-darwin, ... }: {
     nixosConfigurations.f3a = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
         disko.nixosModules.disko
         ./hosts/f3a
+      ];
+    };
+
+    nixosConfigurations.wsl = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      specialArgs = { inherit self; };
+      modules = [
+        nixos-wsl.nixosModules.default
+        home-manager.nixosModules.home-manager
+        ./hosts/wsl
+      ];
+    };
+
+    darwinConfigurations.mac = nix-darwin.lib.darwinSystem {
+      specialArgs = { inherit self; };
+      modules = [
+        home-manager.darwinModules.home-manager
+        ./hosts/mac
       ];
     };
 
